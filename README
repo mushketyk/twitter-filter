@@ -1,0 +1,8 @@
+Twitter users that are subscribed to several other users know that the amount of tweets can be overwhelming and some of tweets are not interesting or important. Filtering those tweets that user doesn't interesting in and displaying only those that user would like to read is the aim of twitter-filter.
+
+This software is just for fun. It will use:
+* Artificial neural networks to evaluate tweets (FANN library)
+* Qt4 based interface
+* Sqlite to save data
+
+
