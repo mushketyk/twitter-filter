@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pyuic4 mainWindow.ui -o ../twitterFilter/mainWindow.py
+pyuic4 tweetWidget.ui -o ../twitterFilter/tweetWidget.py
