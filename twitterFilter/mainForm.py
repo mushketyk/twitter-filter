@@ -3,6 +3,7 @@ from PyQt4.QtCore import Qt
 from PyQt4.QtGui import QVBoxLayout, QScrollArea, QPushButton, QListWidget, QWidget, QLabel
 from twitterFilter.mainWindow import Ui_MainWindow
 from twitterFilter.tweetWidget import Ui_TweetWidget
+from twitterFilter.twitter import TwitterAPI, DumbTwitterAPI, Tweet
 
 from twitterFilter.widgets import TweetsWidget, TweetWidget
 
@@ -19,29 +20,17 @@ class MainForm(Ui_MainWindow):
             tab_layout = QVBoxLayout()
             tab.setLayout(tab_layout)
 
-            tweets_widget = TweetsWidget()
-            tab_layout.addWidget(tweets_widget)
-            #scroll_box = QScrollArea()
-            #scroll_box.setWidgetResizable(True)
-            #tab_layout.addWidget(scroll_box)
+            tab.tweets_widget = TweetsWidget()
+            tab_layout.addWidget(tab.tweets_widget)
 
-            #scroll_widget = QWidget()
-            #scroll_box_layout = QVBoxLayout(scroll_widget)
-            #scroll_box.setWidget(scroll_widget)
 
-            #scroll_box_layout.setSpacing(2)
-            #scroll_box_layout.setMargin(2)
+        api = DumbTwitterAPI("IvanMushketik")
+        tweets = api.get_last_tweets()
 
-            #scroll_box_layout.setAlignment(Qt.AlignTop)
-            #scroll_box_layout.setSizeConstraint(QtGui.QLayout.SetMaximumSize)
+        for tweet in tweets:
+            self.all_tweets_tab.tweets_widget.add_tweet(tweet)
 
-            for i in range(10):
-                #new_tweet_widget = QtGui.QWidget()
-                #ui = TweetWidget()
-                #ui.setupUi(new_tweet_widget)
 
-                #scroll_box_layout.addWidget(new_tweet_widget)
-                tweets_widget.add_tweet(None)
 
 
 

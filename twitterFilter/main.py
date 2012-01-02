@@ -14,6 +14,7 @@ if __name__ == "__main__":
     MainWindow = QtGui.QMainWindow()
     ui = MainForm()
     ui.setupUi(MainWindow)
+
     #MainWindow.setMaximumSize(400, 400)
     MainWindow.show()
     sys.exit(app.exec_())

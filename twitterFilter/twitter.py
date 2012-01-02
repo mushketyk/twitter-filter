@@ -1,3 +1,5 @@
+import pickle
+
 __author__ = 'proger'
 
 import tweepy
@@ -8,9 +10,22 @@ class Tweet:
         self.created_at = tweepy_tweet.created_at
         self.author = TwitterUser(tweepy_tweet.author)
 
+
+
 class TwitterUser:
     def __init__(self, tweepy_user):
         self.name = tweepy_user.name
+
+class DumbTwitterAPI:
+    def __init__(self, user_name):
+        pass
+
+    def get_last_tweets(self):
+        fd = open("tweets.test", "rb")
+        tweets = pickle.load(open("/home/proger/tweets.test", "rb"))
+        fd.close()
+
+        return tweets
 
 class TwitterAPI:
     def __init__(self, user_name):
@@ -49,8 +64,9 @@ class TwitterAPI:
             users.append(user)
 
 if __name__ == "__main__":
-    api = TwitterAPI("kakabuka")
+    api = TwitterAPI("IvanMushketik")
     tweets = api.get_last_tweets()
 
-    for tweet in tweets:
-        print "Created by: " + str(tweet.author.name) + "; Created at: " + str(tweet.created_at) + "; Text: " + str(tweet.text)
+    fd = open("/home/proger/tweets.test", "wb")
+    pickle.dump(tweets, fd)
+    fd.close()
