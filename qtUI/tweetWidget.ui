@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>506</width>
-    <height>300</height>
+    <width>596</width>
+    <height>456</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -58,20 +58,29 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>-10</y>
-         <width>381</width>
+         <x>0</x>
+         <y>0</y>
+         <width>481</width>
          <height>151</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="group_box_layout">
         <property name="sizeConstraint">
-         <enum>QLayout::SetMaximumSize</enum>
+         <enum>QLayout::SetMinimumSize</enum>
         </property>
         <item>
-         <layout class="QHBoxLayout" name="tweet_controls_layout">
+         <layout class="QHBoxLayout" name="tweet_controls_layout" stretch="1,1,1">
+          <property name="spacing">
+           <number>1</number>
+          </property>
           <item>
            <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Result:</string>
             </property>
@@ -93,6 +102,12 @@
             </property>
             <item>
              <widget class="QDoubleSpinBox" name="doubleSpinBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>1</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximum">
                <double>5.000000000000000</double>
               </property>
@@ -107,6 +122,12 @@
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <widget class="QPushButton" name="save_button">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>1</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Save</string>
               </property>
@@ -117,7 +138,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="tweet_text_layout">
+         <layout class="QVBoxLayout" name="tweet_text_layout" stretch="0,1">
           <property name="sizeConstraint">
            <enum>QLayout::SetMinimumSize</enum>
           </property>
@@ -125,7 +146,35 @@
            <number>5</number>
           </property>
           <item>
-           <widget class="QTextEdit" name="textEdit"/>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="1">
+             <widget class="QLabel" name="publishing_date">
+              <property name="text">
+               <string>Publishing Date</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="author_name">
+              <property name="text">
+               <string>Tweet Author</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>4</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Tweet Text</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
