@@ -5,6 +5,7 @@ __author__ = 'proger'
 
 from PyQt4.QtGui import QApplication
 from mainWindow import *
+from twitterFilter.twitter import Tweet, TwitterUser
 
 
 

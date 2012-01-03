@@ -24,7 +24,7 @@ class MainForm(Ui_MainWindow):
             tab_layout.addWidget(tab.tweets_widget)
 
 
-        api = DumbTwitterAPI("IvanMushketik")
+        api = TwitterAPI("IvanMushketik")
         tweets = api.get_last_tweets()
 
         for tweet in tweets:

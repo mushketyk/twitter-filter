@@ -1,4 +1,5 @@
 import pickle
+import urlparse
 
 __author__ = 'proger'
 
@@ -10,13 +11,12 @@ class Tweet:
         self.created_at = tweepy_tweet.created_at
         self.author = TwitterUser(tweepy_tweet.author)
 
-
-
 class TwitterUser:
     def __init__(self, tweepy_user):
         self.name = tweepy_user.name
 
 class DumbTwitterAPI:
+
     def __init__(self, user_name):
         pass
 
@@ -28,6 +28,7 @@ class DumbTwitterAPI:
         return tweets
 
 class TwitterAPI:
+
     def __init__(self, user_name):
         self.user_name = user_name
         self.twitter_user = tweepy.api.get_user(user_name)
@@ -42,7 +43,7 @@ class TwitterAPI:
             for message in tweepy.api.user_timeline(friend.id, count = 10):
                 result.append(Tweet(message))
 
-        return sorted(result, key = lambda tweet: tweet.created_at)
+        return sorted(result, key = lambda tweet: tweet.created_at, reverse=True)
 
     def _get_followers_list(self):
         if not self.followers:
@@ -62,6 +63,25 @@ class TwitterAPI:
         for tweepy_user in tweepy_users:
             user = TwitterUser(tweepy_user.name)
             users.append(user)
+
+def format_tweet_text(text):
+    result = ""
+
+    for word in text.split():
+        append = word
+
+        res = urlparse.urlparse(word)
+        # This is url
+        if res.scheme and res.hostname:
+            append = "<a href='" + word + "'>" + word + "</a>"
+        elif word.startswith('#'):
+            append = "<font color='blue'>" + word + "</font>"
+        elif word.startswith('@'):
+            append = "<font color='blue'>" + word + "</font>"
+
+        result += ' ' + append
+
+    return result
 
 if __name__ == "__main__":
     api = TwitterAPI("IvanMushketik")
