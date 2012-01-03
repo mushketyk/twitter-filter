@@ -12,9 +12,7 @@ from twitterFilter.twitter import Tweet, TwitterUser
 import sys
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
-    MainWindow = QtGui.QMainWindow()
-    ui = MainForm()
-    ui.setupUi(MainWindow)
+    MainWindow = MainForm()
 
     #MainWindow.setMaximumSize(400, 400)
     MainWindow.show()
