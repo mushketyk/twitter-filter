@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-from PyQt4.QtCore import Qt
+from PyQt4.QtCore import Qt, SIGNAL
 from PyQt4.QtGui import QScrollArea, QWidget, QVBoxLayout
 from twitterFilter import twitter
 from twitterFilter.tweetWidget import Ui_TweetWidget
@@ -12,10 +12,20 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class TweetWidget(QWidget, Ui_TweetWidget):
-    def __init__(self):
+    def __init__(self, tweet):
         QWidget.__init__(self)
 
         self.setupUi(self)
+        self.tweet = tweet
+
+        self.display_author_name(self.tweet.author.name)
+        self.display_publishing_date(self.tweet.created_at)
+        self.display_tweet_text(self.tweet.text)
+
+        self.connect(self.save_button, SIGNAL("clicked(bool)"), self.save_button_clicked)
+
+    def save_button_clicked(self):
+        self.emit(SIGNAL("tweetSaving"), self)
 
     def setupUi(self, Widget):
         super(TweetWidget, self).setupUi(Widget)
@@ -30,6 +40,7 @@ class TweetWidget(QWidget, Ui_TweetWidget):
     def display_tweet_text(self, tweet_text):
         formated_text = twitter.format_tweet_text(tweet_text)
         self.tweet_text.setText(_fromUtf8(formated_text))
+
 
 class TweetsWidget(QScrollArea):
     def __init__(self):
@@ -48,14 +59,8 @@ class TweetsWidget(QScrollArea):
         self.scroll_box_layout.setSizeConstraint(QtGui.QLayout.SetMaximumSize)
 
 
-    def add_tweet(self, tweet):
-        new_tweet_widget = TweetWidget()
-
-        new_tweet_widget.display_author_name(tweet.author.name)
-        new_tweet_widget.display_publishing_date(tweet.created_at)
-        new_tweet_widget.display_tweet_text(tweet.text)
-
-        self.scroll_box_layout.addWidget(new_tweet_widget)
+    def add_tweet_widget(self, tweet_widget):
+        self.scroll_box_layout.addWidget(tweet_widget)
 
 
 
